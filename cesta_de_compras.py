@@ -18,7 +18,6 @@ cesta_de_compras = {
     "tomates": {"precio": 2200, "porcentaje": 3}
 }
 
-precios_mas_iva = {}
 
 aplicar_descuento = lambda producto: cesta_de_compras[producto]["precio"] * cesta_de_compras[producto]["porcentaje"] / 100
 
