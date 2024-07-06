@@ -1,8 +1,5 @@
 # Escribir una función que aplique un descuento a un precio y otra que aplique el IVA a un precio. Escribir una tercera función que reciba un diccionario con los precios y porcentajes de una cesta de la compra, y una de las funciones anteriores, y utilice la función pasada para aplicar los descuentos o el IVA a los productos de la cesta y devolver el precio final de la cesta.
 
-# valor_producto = int(input("Agregue el valor del producto:\n"))
-
-# descuento = int(input("¿Cuánto descuento quiere aplicar al producto: 10, 20 o 25%?:\n"))
 
 cesta_de_compras = {
     "manzanas": {"precio": 2000, "porcentaje": 10},
@@ -21,34 +18,31 @@ cesta_de_compras = {
     "tomates": {"precio": 2200, "porcentaje": 3}
 }
 
+precios_mas_iva = {}
+
+aplicar_descuento = lambda producto: cesta_de_compras[producto]["precio"] * cesta_de_compras[producto]["porcentaje"] / 100
+
+aplicar_iva = lambda producto: cesta_de_compras[producto]["precio"] * 0.19
 
 
-def descuento(valor_producto, descuento):
+def funcion_superior(cesta_de_compras, func):
 
-    valor_descuento =  valor_producto * (descuento / 100)
+    if func == aplicar_iva:
+        for item in cesta_de_compras:
+            resultado_iva = func(item)
+            print(f"El IVA de {item} es ${resultado_iva}")
 
-    valor_con_descuento = valor_producto - valor_descuento
-
-    return f"El precio del producto es de {valor_producto}.\nSu descuento fue de {descuento}%.\nSe descontaron {valor_descuento}.\nEl producto le cuesta {valor_con_descuento}"
-
-
-def iva(valor_producto):
-
-    iva = valor_producto * 0.19
-
-    return f"Su producto cuesta {valor_producto + iva} con IVA incluído."
-
-
-def aplicar_descuento_o_iva(cesta_de_compras, func):
-
-    descuento_producto = func(cesta_de_compras["precio"], cesta_de_compras["porcentaje"])
-
-    return descuento_producto
-
-
-total = aplicar_descuento_o_iva(cesta_de_compras["manzanas"], descuento)
-print(total)
-
-
+    elif func == aplicar_descuento:
+        for item in cesta_de_compras:
+            resultado_desc = func(item)
+            print(f"El descuento de {item} es ${resultado_desc}")
 
     
+funcion_superior(cesta_de_compras, aplicar_iva)
+
+print()
+
+funcion_superior(cesta_de_compras, aplicar_descuento)
+
+
+
